@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage">
+
+    <StackLayout Padding="20" VerticalOptions="Center">
+
+        <!-- Search bar for entering city name -->
+        <SearchBar x:Name="CitySearchBar" Placeholder="Search for a city..." />
+
+        <!-- Button to submit city search -->
+        <Button Text="Fetch Forecast" 
+                Clicked="OnGetWeatherClicked" 
+                BackgroundColor="Blue" 
+                TextColor="White"
+                Margin="0,10,0,10" />
+
+        <!-- Navigation Button to To-Do List -->
+        <Button Text="Manage Tasks" 
+                Clicked="OnNavigateToTodoPage" 
+                BackgroundColor="Purple" 
+                TextColor="White"
+                VerticalOptions="End"
+                Margin="10" />
+
+        <!-- Display temperature information -->
+        <Label Text="Weather Details" FontSize="24" HorizontalOptions="Center" Margin="0,20,0,10" />
+
+        <!-- Weather information labels with default placeholders -->
+        <Label x:Name="TemperatureLabel" Text="Current Temperature: --°C" FontSize="18" />
+        <Label x:Name="TempMinLabel" Text="Low Temperature: --°C" FontSize="18" />
+        <Label x:Name="TempMaxLabel" Text="High Temperature: --°C" FontSize="18" />
+        <Label x:Name="ForecastLabel" Text="Weather Outlook: --" FontSize="18" />
+
+        <!-- Wind alert label -->
+        <Label x:Name="WindAlertLabel" Text="Wind Alert: --" FontSize="18" Margin="0,10,0,0" />
+
+    </StackLayout>
+</ContentPage>

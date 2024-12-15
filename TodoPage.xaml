@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.TodoPage"
+             xmlns:local="clr-namespace:MauiApp1"
+             xmlns:converters="clr-namespace:MauiApp1.Converters">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToTextDecorationConverter x:Key="BoolToTextDecorationConverter" />
+            <converters:BoolToCompleteButtonTextConverter x:Key="BoolToCompleteButtonTextConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Padding="20">
+        <!-- Entry for new To-Do item -->
+        <Entry x:Name="NewTodoEntry"
+               Placeholder="Add a new task..." 
+               VerticalOptions="Center" />
+
+        <!-- Add Button -->
+        <Button Text="Add Task" 
+                Clicked="OnAddTodoClicked"
+                BackgroundColor="Green" 
+                TextColor="White"
+                VerticalOptions="Start" 
+                Margin="0,10,0,0" />
+
+        <!-- To-Do List -->
+        <CollectionView x:Name="TodoCollectionView"
+                        SelectionMode="None"
+                        VerticalOptions="FillAndExpand"
+                        Margin="0, 20, 0, 0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Todo Title -->
+                        <Label Text="{Binding Title}"
+                               TextDecorations="{Binding IsCompleted, Converter={StaticResource BoolToTextDecorationConverter}}"
+                               VerticalOptions="Center"
+                               FontSize="Medium" />
+
+                        <!-- Complete Button -->
+                        <Button Grid.Column="1"
+                                BackgroundColor="Orange"
+                                Text="{Binding IsCompleted, Converter={StaticResource BoolToCompleteButtonTextConverter}}"
+                                Clicked="OnCompleteTodoClicked"
+                                BindingContext="{Binding .}" 
+                                Margin="5"/>
+
+                        <!-- Delete Button -->
+                        <Button Grid.Column="2"
+                                BackgroundColor="Red"
+                                Text="Delete"
+                                Clicked="OnDeleteTodoClicked"
+                                BindingContext="{Binding .}"
+                                Margin="5"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Back to Weather Button -->
+        <Button Text="Back to Weather" 
+                Clicked="OnNavigateToWeatherPage"
+                BackgroundColor="Blue" 
+                TextColor="White"
+                VerticalOptions="End" 
+                Margin="10" />
+    </StackLayout>
+</ContentPage>
